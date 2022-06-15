@@ -1,3 +1,5 @@
 
 
 This project will use notebook because my computer doesnt have GPU so I will have to use GoogleColab ( Try to get a Tesla T4 for better speed)
+
+1 - First model
