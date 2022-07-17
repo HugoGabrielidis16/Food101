@@ -1,24 +1,22 @@
 # Food101
+
 Food101 Project
 
+## Description :
 
-## Description : 
 The aim of this project is to achieve a better accuracy on the Food101 dataset than the one described in the orginal paper.
 
 ## How to :
-I will use transfer learning with an Efficientnet backbone, first as a featureextractor and then fine tuning unfreezing some layers.
-If efficientNetsB0 isn't good enough I will try the B1 model, if i'm not able to achieve 75% with B1 I will do fine tuning on my hyper parameters.
+
+I will use transfer learning with an Efficientnet backbone, first as a feature extractor and then fine tuning by unfreezing some layers.
+I implemented a basic Baseline model, ResNET50, EfficientNetB0-4 model and a Vision Transformer model
 
 ## Framework used :
-Since I'am familiar with keras & Tensorflow I will first do it using them and then do it using PyTorch in order to learn it as well.
 
-First :
-  - Tensorflow
-  - Keras
-Seco
+All models will be created using TensorFlow and Keras.
 
 ## Deployment :
-Docker container 
 
+At the end of the experience, I will use Docker to make my most performant model, and be able to test it on various image.
 
-
+## Results :

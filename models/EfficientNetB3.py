@@ -8,8 +8,8 @@ mixed_precision.set_global_policy("mixed_float16")
 mixed_precision.global_policy() """
 
 
-def base_EfficientNetB0_model():
-    efficient_net = tf.keras.applications.EfficientNetB0(
+def base_EfficientNetB3_model():
+    efficient_net = tf.keras.applications.EfficientNetB3(
         include_top=False, weights="imagenet"
     )
     efficient_net.trainable = False
@@ -24,8 +24,8 @@ def base_EfficientNetB0_model():
     return model
 
 
-def finetuned_EfficientNetB0_model(layers_numbers):
-    efficient_net = tf.keras.applications.EfficientNetB0(
+def finetuned_EfficientNetB3_model(layers_numbers):
+    efficient_net = tf.keras.applications.EfficientNetB3(
         include_top=False, weights="imagenet"
     )
     efficient_net.trainable = True
@@ -49,7 +49,7 @@ def finetuned_EfficientNetB0_model(layers_numbers):
 
 
 if __name__ == "__main__":
-    base_model = base_EfficientNetB0_model()
+    base_model = base_EfficientNetB3_model()
     base_model.summary()
-    finetuned_model = finetuned_EfficientNetB0_model(12)
+    finetuned_model = finetuned_EfficientNetB3_model(12)
     finetuned_model.summary()

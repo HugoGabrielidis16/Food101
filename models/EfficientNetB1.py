@@ -18,7 +18,7 @@ def base_EfficientNetB1_model():
     return model
 
 
-def fine_EfficientNetB1_model(layers_numbers):
+def finetuned_EfficientNetB1_model(layers_numbers):
     efficient_net = tf.keras.applications.EfficientNetB1(
         include_top=False, weights="imagenet"
     )

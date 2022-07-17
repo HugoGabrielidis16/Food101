@@ -5,6 +5,14 @@ from tensorflow.keras import layers
 
 
 def image_augmentation(x):
+    """
+    Apply some image augmentation function a tensor
+
+    Parameters
+    ----------
+    x (tensor): tensor to apply the augmentation on
+
+    """
     img_augmentation = tf.keras.Sequential(
         [
             layers.RandomRotation(factor=0.15),
@@ -17,11 +25,25 @@ def image_augmentation(x):
 
 
 def processing_image(img, label, HEIGHT=224, WIDTH=224, augmented=False):
+    """
+    Function to map on each elements of the dataset.
+    Turns an unknown sized tensor into a tensor (224, 224, 3), cast it to float32, and apply image augmentation to it if
+    precised.
+
+
+    Parameters
+    ----------
+    img (tensor, array): the image to convert
+    label(tensor, array, int) : the label of the image, remain unchanged.
+    HEIGHT (int) : the height we want for the targeted image
+    WIDTH (int) : the width we want for the targeted image
+    augmented (bool ) :
+
+    """
     img = tf.image.resize(img, (HEIGHT, WIDTH))
     img = tf.cast(img, tf.float32)
     if augmented:
         img = image_augmentation(img)
-        print(img.shape)
     return img, label
 
 
@@ -39,6 +61,11 @@ def process_ds(ds, batch_size=32, augmented=False):
 
 
 def load_data():
+    """
+    Download or load the food101 datasets
+
+    Apply
+    """
     (train_data, test_data), info = tfds.load(
         name="food101",
         split=["train", "validation"],

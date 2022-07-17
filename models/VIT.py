@@ -93,5 +93,5 @@ def VIT(
 
 
 if __name__ == "__main__":
-    model = create_vit_classifier(101)
+    model = VIT(101)
     model.summary()
