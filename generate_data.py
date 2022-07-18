@@ -1,4 +1,3 @@
-from tkinter.tix import Tree
 import tensorflow_datasets as tfds
 import tensorflow as tf
 from tensorflow.keras import layers
