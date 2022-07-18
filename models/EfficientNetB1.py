@@ -18,20 +18,11 @@ def base_EfficientNetB1_model():
     return model
 
 
-def finetuned_EfficientNetB1_model(layers_numbers):
+def finetuned_EfficientNetB1_model():
     efficient_net = tf.keras.applications.EfficientNetB1(
         include_top=False, weights="imagenet"
     )
-    efficient_net.trainable = False
-
     efficient_net.trainable = True
-    for layer in efficient_net.layers[:-layers_numbers]:
-        layer.trainable = False
-
-    # Freeze BatchNorm layers
-    for layer in efficient_net.layers[-layers_numbers:]:
-        if isinstance(layer, layers.BatchNormalization):
-            layer.trainable = False
 
     input = layers.Input(shape=(224, 224, 3))
     x = efficient_net(input)
@@ -45,6 +36,7 @@ def finetuned_EfficientNetB1_model(layers_numbers):
 
 
 if __name__ == "__main__":
-    model = base_EfficientNetB1_model()
-    for layer in model.layers:
-        print(layer.name, layer.trainable, layer.dtype, layer.dtype_policy)
+    base_model = base_EfficientNetB1_model()
+    base_model.summary()
+    finetuned_model = finetuned_EfficientNetB1_model()
+    finetuned_model.summary()

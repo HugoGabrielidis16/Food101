@@ -1,15 +1,37 @@
 import tensorflow as tf
 from models.Baseline import baseline
-from models.EfficientNetB0 import base_EfficientNetB0_model
-from models.EfficientNetB1 import base_EfficientNetB1_model
-from models.EfficientNetB2 import base_EfficientNetB2_model
-from models.EfficientNetB3 import base_EfficientNetB3_model
-from models.EfficientNetB4 import base_EfficientNetB4_model
+from models.EfficientNetB0 import (
+    base_EfficientNetB0_model,
+    finetuned_EfficientNetB0_model,
+)
+from models.EfficientNetB1 import (
+    base_EfficientNetB1_model,
+    finetuned_EfficientNetB1_model,
+)
+from models.EfficientNetB2 import (
+    base_EfficientNetB2_model,
+    finetuned_EfficientNetB2_model,
+)
+from models.EfficientNetB3 import (
+    base_EfficientNetB3_model,
+    finetuned_EfficientNetB3_model,
+)
+from models.EfficientNetB4 import (
+    base_EfficientNetB4_model,
+    finetuned_EfficientNetB4_model,
+)
 from models.VIT import VIT
 from function import *
 from generate_data import load_data
 import argparse
 from config import Config
+
+from tensorflow.keras import (
+    mixed_precision,
+)  # with tf 2.8 -> seems to be an issue when using tf 2.9
+
+mixed_precision.set_global_policy("mixed_float16")
+mixed_precision.global_policy()
 
 
 if __name__ == "__main__":
@@ -42,6 +64,6 @@ if __name__ == "__main__":
         batch_size=config.train_batch_size,
         steps_per_epoch=len(train_ds),
         validation_steps=int(0.15 * len(test_ds)),
-        callbacks=callbacks,
+        callbacks=config.callbacks,
     )
     model.save(config.saving_path)

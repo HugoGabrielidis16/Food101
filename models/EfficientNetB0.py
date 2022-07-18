@@ -2,10 +2,10 @@ import tensorflow as tf
 from tensorflow.keras import layers
 import sklearn
 
-""" from tensorflow.keras import mixed_precision  # with tf 2.8
+from tensorflow.keras import mixed_precision  # with tf 2.8
 
 mixed_precision.set_global_policy("mixed_float16")
-mixed_precision.global_policy() """
+mixed_precision.global_policy()
 
 
 def base_EfficientNetB0_model():
@@ -24,18 +24,10 @@ def base_EfficientNetB0_model():
     return model
 
 
-def finetuned_EfficientNetB0_model(layers_numbers):
+def finetuned_EfficientNetB0_model():
     efficient_net = tf.keras.applications.EfficientNetB0(
         include_top=False, weights="imagenet"
     )
-    efficient_net.trainable = True
-    for layer in efficient_net.layers[:-layers_numbers]:
-        layer.trainable = False
-
-    # Freeze BatchNorm layers
-    for layer in efficient_net.layers[-layers_numbers:]:
-        if isinstance(layer, layers.BatchNormalization):
-            layer.trainable = False
 
     input = layers.Input(shape=(224, 224, 3))
     x = efficient_net(input)
@@ -51,5 +43,8 @@ def finetuned_EfficientNetB0_model(layers_numbers):
 if __name__ == "__main__":
     base_model = base_EfficientNetB0_model()
     base_model.summary()
-    finetuned_model = finetuned_EfficientNetB0_model(12)
+    finetuned_model = finetuned_EfficientNetB0_model()
     finetuned_model.summary()
+
+    for layer in finetuned_model.layers:
+        print(layer.name, layer.trainable, layer.dtype, layer.dtype_policy)

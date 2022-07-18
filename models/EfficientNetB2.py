@@ -24,18 +24,10 @@ def base_EfficientNetB2_model():
     return model
 
 
-def finetuned_EfficientNetB2_model(layers_numbers):
+def finetuned_EfficientNetB2_model():
     efficient_net = tf.keras.applications.EfficientNetB2(
         include_top=False, weights="imagenet"
     )
-    efficient_net.trainable = True
-    for layer in efficient_net.layers[:-layers_numbers]:
-        layer.trainable = False
-
-    # Freeze BatchNorm layers
-    for layer in efficient_net.layers[-layers_numbers:]:
-        if isinstance(layer, layers.BatchNormalization):
-            layer.trainable = False
 
     input = layers.Input(shape=(224, 224, 3))
     x = efficient_net(input)

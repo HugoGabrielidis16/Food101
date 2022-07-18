@@ -24,19 +24,11 @@ def base_EfficientNetB4_model():
     return model
 
 
-def finetuned_EfficientNetB4_model(layers_numbers):
+def finetuned_EfficientNetB4_model():
+
     efficient_net = tf.keras.applications.EfficientNetB4(
         include_top=False, weights="imagenet"
     )
-    efficient_net.trainable = True
-    for layer in efficient_net.layers[:-layers_numbers]:
-        layer.trainable = False
-
-    # Freeze BatchNorm layers
-    for layer in efficient_net.layers[-layers_numbers:]:
-        if isinstance(layer, layers.BatchNormalization):
-            layer.trainable = False
-
     input = layers.Input(shape=(224, 224, 3))
     x = efficient_net(input)
     x = layers.GlobalAveragePooling2D()(x)
@@ -51,5 +43,5 @@ def finetuned_EfficientNetB4_model(layers_numbers):
 if __name__ == "__main__":
     base_model = base_EfficientNetB4_model()
     base_model.summary()
-    finetuned_model = finetuned_EfficientNetB4_model(80)
+    finetuned_model = finetuned_EfficientNetB4_model()
     finetuned_model.summary()

@@ -1,5 +1,6 @@
 import wandb
 from wandb.keras import WandbCallback
+import tensorflow as tf
 
 dict = {
     "learning_rate": 0.001,
@@ -25,6 +26,16 @@ class Config:
     max_gnorm = 1000
 
     wandb_bool = False
+
+    callbacks = [
+        tf.keras.callbacks.EarlyStopping(patience=5),
+        tf.keras.callbacks.ModelCheckpoint(
+            filepath="model.{epoch:02d}-{val_loss:.2f}.h5"
+        ),
+        tf.keras.callbacks.ReduceLROnPlateau(
+            monitor="val_loss", factor=0.1, patience=5, min_lr=0.001
+        ),
+    ]
 
     def __init__(self, model_name):
         self.model_name = model_name
