@@ -2,6 +2,10 @@ from tkinter.tix import Tree
 import tensorflow_datasets as tfds
 import tensorflow as tf
 from tensorflow.keras import layers
+import resource
+
+low, high = resource.getrlimit(resource.RLIMIT_NOFILE)
+resource.setrlimit(resource.RLIMIT_NOFILE, (high, high))
 
 
 def image_augmentation(x):
