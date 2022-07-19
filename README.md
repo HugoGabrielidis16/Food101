@@ -23,11 +23,11 @@ I implemented a basic Baseline model, ResNET50, EfficientNetB0-4 model and a Vis
 
 ## Stack used :
 
-matplotlib==3.5.2
-numpy==1.22.4
-scikit_learn==1.1.1
-tensorflow==2.8.2
-tensorflow_datasets==4.6.0
+matplotlib==3.5.2  <br />
+numpy==1.22.4  <br />
+scikit_learn==1.1.1  <br />
+tensorflow==2.8.2  <br />
+tensorflow_datasets==4.6.0 <br />
 wandb==0.12.21
 
 ## Deployment :

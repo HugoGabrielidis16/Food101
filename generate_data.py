@@ -1,8 +1,10 @@
 import tensorflow_datasets as tfds
 import tensorflow as tf
 from tensorflow.keras import layers
+from config import Config
 import resource
 
+config = Config()
 low, high = resource.getrlimit(resource.RLIMIT_NOFILE)
 resource.setrlimit(resource.RLIMIT_NOFILE, (high, high))
 
@@ -71,9 +73,8 @@ def process_ds(ds, batch_size=32, augmented=False):
 
 def load_data():
     """
-    Download or load the food101 datasets
-
-    Apply
+    Download or load the food101 datasets from a folder if already downloaded.
+    Apply the process_ds function both datasets
     """
     (train_data, test_data), info = tfds.load(
         name="food101",
@@ -83,8 +84,10 @@ def load_data():
         with_info=True,
         data_dir=".",
     )
-    train_data = process_ds(train_data, batch_size=32, augmented=True)
-    test_data = process_ds(test_data, batch_size=64)
+    train_data = process_ds(
+        train_data, batch_size=config.train_batch_size, augmented=True
+    )
+    test_data = process_ds(test_data, batch_size=config.test_batch_size)
 
     return train_data, test_data, info
 
