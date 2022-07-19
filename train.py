@@ -30,6 +30,7 @@ from tensorflow.keras import (
     mixed_precision,
 )  # with tf 2.8 -> seems to be an issue when using tf 2.9
 
+GPUS = ["GPU:0", "GPU:1"]
 mixed_precision.set_global_policy("mixed_float16")
 mixed_precision.global_policy()
 
@@ -45,25 +46,27 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    strategy = tf.distribute.MirroredStrategy(GPUS)
     train_ds, test_ds, info = load_data()
 
-    model = eval(args.model)()
+    with strategy.scope():
+        model = eval(args.model)()
 
-    config = Config(args.model)
+        config = Config(args.model)
 
-    model.compile(
-        loss="sparse_categorical_crossentropy",
-        metrics=tf.keras.metrics.SparseCategoricalAccuracy(),
-        optimizer=tf.keras.optimizers.Adam(learning_rate=config.learning_rate),
-    )
-    callbacks = []
-    model.fit(
-        train_ds,
-        validation_data=test_ds,
-        epochs=config.epochs,
-        batch_size=config.train_batch_size,
-        steps_per_epoch=len(train_ds),
-        validation_steps=int(0.15 * len(test_ds)),
-        callbacks=config.callbacks,
-    )
-    model.save(config.saving_path)
+        model.compile(
+            loss="sparse_categorical_crossentropy",
+            metrics=tf.keras.metrics.SparseCategoricalAccuracy(),
+            optimizer=tf.keras.optimizers.Adam(learning_rate=config.learning_rate),
+        )
+        callbacks = []
+        model.fit(
+            train_ds,
+            validation_data=test_ds,
+            epochs=config.epochs,
+            batch_size=config.train_batch_size,
+            steps_per_epoch=len(train_ds),
+            validation_steps=int(0.15 * len(test_ds)),
+            callbacks=config.callbacks,
+        )
+        model.save(config.saving_path)
