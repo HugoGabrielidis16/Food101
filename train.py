@@ -46,12 +46,17 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    strategy = tf.distribute.MirroredStrategy(GPUS)
+    # strategy = tf.distribute.MirroredStrategy(GPUS) # No need to specify GPUs since by default the strategy will use all GPUs available
+    strategy = tf.distribute.MirroredStrategy()
+    print("Number of devices: {}".format(strategy.num_replicas_in_sync))
+
     train_ds, test_ds, info = load_data()
 
     with strategy.scope():
-        model = eval(args.model)()
+        # Everything that creates variables should be under the strategy scope.
+        # In general this is only model construction & `compile()`.
 
+        model = eval(args.model)()
         config = Config(args.model)
 
         model.compile(
@@ -59,7 +64,7 @@ if __name__ == "__main__":
             metrics=tf.keras.metrics.SparseCategoricalAccuracy(),
             optimizer=tf.keras.optimizers.Adam(learning_rate=config.learning_rate),
         )
-        callbacks = []
+
         model.fit(
             train_ds,
             validation_data=test_ds,
