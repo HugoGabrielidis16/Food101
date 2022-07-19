@@ -14,8 +14,8 @@ class Config:
     resize = (224, 224)
     pretrained = True
     epochs = 20
-
-    train_batch_size = 32
+    number_of_GPU = len(tf.config.experimental.list_physical_devices("GPU"))
+    train_batch_size = 32 * number_of_GPU  # 32 per gpu used
     test_batch_size = 64
     seed = True
 
