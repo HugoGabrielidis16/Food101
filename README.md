@@ -1,6 +1,13 @@
 # Food101
 
-Food101 Project
+## Dataset :
+
+The Food-101 dataset consists of 101 food categories with 750 training and 250 test images per category, making a total of 101k images. The labels for the test images have been manually cleaned, while the training set contains some noise.
+
+## Goal
+
+In the DeepFood: "Deep Learning-based Food Image Recognition for Computer-aided Dietary Assessment" paper that presented the datasets the scientist achieved an top 1 -accuracy of 76.3%.
+My was to surpass this accuracy implementing various state of the arts models, also implementing various image augmentation, methods to prevent overfitting & fine tuning methods.
 
 ## Description :
 

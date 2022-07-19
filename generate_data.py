@@ -51,6 +51,12 @@ def processing_image(img, label, HEIGHT=224, WIDTH=224, augmented=False):
 
 
 def process_ds(ds, batch_size=32, augmented=False):
+    """
+    Takes as tf.data.Dataset map the processing image function to it, batch it to 32
+
+    Parameters :
+    ds (tf.data.Dataset) :
+    """
     ds = ds.map(
         map_func=lambda x, y: processing_image(x, y, augmented=augmented),
         num_parallel_calls=tf.data.AUTOTUNE,
@@ -77,7 +83,7 @@ def load_data():
         with_info=True,
         data_dir=".",
     )
-    train_data = process_ds(train_data, batch_size=32)
+    train_data = process_ds(train_data, batch_size=32, augmented=True)
     test_data = process_ds(test_data, batch_size=64)
 
     return train_data, test_data, info

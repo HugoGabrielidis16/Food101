@@ -9,6 +9,9 @@ mixed_precision.global_policy() """
 
 
 def base_ResNet50_model():
+    """
+    Using ResNET50 as a feature extractor trained on imagenet, returns a the compiled model.
+    """
     efficient_net = tf.keras.applications.resnet50.ResNet50(
         include_top=False, weights="imagenet"
     )
@@ -25,6 +28,9 @@ def base_ResNet50_model():
 
 
 def finetuned_ResNet50_model(layers_numbers):
+    """
+    Finetuning ResNET50 trained on imagenet model, returns a the compiled model.
+    """
     efficient_net = tf.keras.applications.resnet50.ResNet50(
         include_top=False, weights="imagenet"
     )
