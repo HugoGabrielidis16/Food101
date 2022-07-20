@@ -2,6 +2,8 @@ import tensorflow as tf
 from generate_data import load_data
 import argparse
 from config import Config
+import numpy as np
+from helper_functions import calculate_results
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="FOOD101")
@@ -14,6 +16,12 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     model = tf.keras.models.load_model(f"models/saved/{args.model}.h5")
-    _, test_data, _ = load_data()
+    _, test_ds, _ = load_data()
     config = Config()
-    model.evaluate(test_data, batch_size=config.test_batch_size)
+    X_test = np.concatenate([x for x, _ in test_ds], axis=0)
+    y_test = np.concatenate([y for _, y in test_ds], axis=0)
+
+    y_pred = model.predict(X_test, verbose=1)
+    results = calculate_results(y_test, y_pred)
+
+    print(results)

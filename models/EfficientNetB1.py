@@ -23,15 +23,12 @@ def finetuned_EfficientNetB1_model():
         include_top=False, weights="imagenet"
     )
     efficient_net.trainable = True
-
     input = layers.Input(shape=(224, 224, 3))
     x = efficient_net(input)
     x = layers.GlobalAveragePooling2D()(x)
     x = layers.Dense(101)(x)
     output = layers.Activation("softmax", dtype=tf.float32, name="output_layer")(x)
-
     model = tf.keras.Model(inputs=input, outputs=output)
-
     return model
 
 

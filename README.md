@@ -31,6 +31,10 @@ tensorflow==2.8.2 <br />
 tensorflow_datasets==4.6.0 <br />
 wandb==0.12.21
 
+
+## ToDo
+
+Use a validation split to fine tuned my model ( can't fine tuned on test data )
 ## Results :
 
 - Baseline : accuracy - 0.1739 precision - recall - F1 score
