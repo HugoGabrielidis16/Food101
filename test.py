@@ -21,10 +21,16 @@ if __name__ == "__main__":
     config = Config()
     X_test = np.concatenate([x for x, _ in test_ds], axis=0)
     y_test = np.concatenate([y for _, y in test_ds], axis=0)
-
+    X_test = X_test[:5]
+    y_test = y_test[:5]
     y_pred = model.predict(X_test, verbose=1)
-    results = calculate_results(y_test, y_pred)
+    y_pred = [np.argmax(x) for x in y_pred]
+    print(y_test)
+    print(y_pred)
+    # results = calculate_results(y_test, y_pred)
+    # print(results)
 
-    file_name = f"results/{args.model}_results"
+    """ file_name = f"results/{args.model}_results.pickle"
+    print(file_name)
     with open(file_name, "wb") as f:
-        pickle.dump(results, file_name)
+        pickle.dump(results, file_name, protocol=pickle.HIGHEST_PROTOCOL) """
