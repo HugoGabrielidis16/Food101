@@ -23,16 +23,23 @@ I implemented a basic Baseline model, ResNET50, EfficientNetB0-4 model and a Vis
 
 ## Stack used :
 
-matplotlib==3.5.2  <br />
-numpy==1.22.4  <br />
-scikit_learn==1.1.1  <br />
-tensorflow==2.8.2  <br />
-tensorflow_datasets==4.6.0 <br />
-wandb==0.12.21
+Generate the mode : <br />
+
+- matplotlib==3.5.2 <br />
+- numpy==1.22.4 <br />
+- scikit_learn==1.1.1 <br />
+- tensorflow==2.8.2 <br />
+- tensorflow_datasets==4.6.0 <br />
+
+Other stacks :
+
+- Docker <br />
+- Flask <br />
 
 ## Deployment :
 
 At the end of the experience, I will use Docker to make my most performant model, and be able to test it on various image.
+I will also use flask to make my projects run in a browser
 
 ## Results :
 
@@ -49,3 +56,9 @@ At the end of the experience, I will use Docker to make my most performant model
 - EfficientNetB3 FineTuned :
 - EfficientNetB4 feature extractor :
 - EfficientNetB4 FineTuned :
+
+# Best performance achieved
+
+In order to get the best performance, I decided to focus on the model EfficientNetB3 Finetuned :
+I splitted my dataset in 3 parts since we cannot do hyper parameter tuning directly on the test set so we have to create a validation set.
+In order to do that I took half of the test set as a validation set, where I will to hyperparameters tunings

@@ -22,9 +22,13 @@ if __name__ == "__main__":
     X_test = np.concatenate([x for x, _ in test_ds], axis=0)
     y_test = np.concatenate([y for _, y in test_ds], axis=0)
 
+    X_test = X_test[:5]
+    y_test = y_test[:5]
     y_pred = model.predict(X_test, verbose=1)
+    y_pred = [np.argmax(x) for x in y_pred]
     results = calculate_results(y_test, y_pred)
 
     file_name = f"results/{args.model}_results"
+
     with open(file_name, "wb") as f:
-        pickle.dump(results, file_name)
+        pickle.dump(results, f)

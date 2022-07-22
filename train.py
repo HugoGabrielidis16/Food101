@@ -69,9 +69,9 @@ if __name__ == "__main__":
             train_ds,
             validation_data=test_ds,
             epochs=config.epochs,
-            batch_size=config.train_batch_size,
             steps_per_epoch=len(train_ds),
             validation_steps=int(0.15 * len(test_ds)),
             callbacks=config.callbacks,
         )
+        # when using tf.data.Dataset when don't have to precise the batch_size
         model.save(config.saving_path)
