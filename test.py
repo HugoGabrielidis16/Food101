@@ -4,6 +4,7 @@ import argparse
 from config import Config
 import numpy as np
 from helper_functions import calculate_results
+import pickle
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="FOOD101")
@@ -24,4 +25,6 @@ if __name__ == "__main__":
     y_pred = model.predict(X_test, verbose=1)
     results = calculate_results(y_test, y_pred)
 
-    print(results)
+    file_name = f"results/{args.model}_results"
+    with open(file_name, "wb") as f:
+        pickle.dump(results, file_name)

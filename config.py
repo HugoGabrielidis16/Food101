@@ -2,12 +2,6 @@ import wandb
 from wandb.keras import WandbCallback
 import tensorflow as tf
 
-dict = {
-    "learning_rate": 0.001,
-    "epochs": 10,
-    "batch_size": 32,
-}
-
 
 class Config:
     learning_rate = 3e-4
