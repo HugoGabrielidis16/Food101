@@ -1,0 +1,4 @@
+** TO DO ** 
+
+  - See why the results on test data are this bad whem the model has approximately 0.85 accuracy
+    -> add a mode.evaluate() when running on the GPU to see if the way I calculate y_pred is good or not
