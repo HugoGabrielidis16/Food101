@@ -57,6 +57,8 @@ if __name__ == "__main__":
         optimizer=tf.keras.optimizers.Adam(learning_rate=config.learning_rate),
     )
     callbacks = []
+    if args.model == "VIT":
+        
     model.fit(
         train_ds,
         validation_data=test_ds,

@@ -3,6 +3,7 @@ import tensorflow as tf
 from tensorflow.keras import layers
 from config import Config
 import resource
+import numpy as np
 
 config = Config()
 low, high = resource.getrlimit(resource.RLIMIT_NOFILE)
@@ -96,10 +97,23 @@ if __name__ == "__main__":
     train_data, test_data, info = load_data()
     class_names = info.features["label"].names
     print(class_names)
-    sample = train_data.take(1)
-    print(sample)
-    for images, labels in sample:
-        print(images[0].dtype)
-        print(labels[0].dtype)
+
+    from vit_keras import vit
+
+    image_size = 224
+    model = vit.vit_l32(
+        image_size=image_size,
+        activation="sigmoid",
+        pretrained=True,
+        include_top=True,
+        pretrained_top=False,
+        classes=200,
+    )
+    for images, labels in train_data.take(1):
+        # print(images[0].dtype)
+        # print(labels[0].dtype)
+        images = np.array(vit.preprocess_inputs(images)).reshape(
+            32, image_size, image_size, 3
+        )
 
     # show_image(image, class_names[label.numpy()])
