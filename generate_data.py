@@ -95,7 +95,7 @@ def load_data():
 if __name__ == "__main__":
     train_data, test_data, info = load_data()
     class_names = info.features["label"].names
-    print(class_names[:10])
+    print(class_names)
     sample = train_data.take(1)
     print(sample)
     for images, labels in sample:

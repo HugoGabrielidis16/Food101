@@ -31,22 +31,27 @@ tensorflow==2.8.2 <br />
 tensorflow_datasets==4.6.0 <br />
 wandb==0.12.21
 
-
 ## ToDo
 
 Use a validation split to fine tuned my model ( can't fine tuned on test data )
+
 ## Results :
 
-- Baseline : accuracy - 0.1739 precision - recall - F1 score
+Tested on 7000 samples
+
+- Baseline : accuracy - 0.1739 | precision - | recall - | F1 score
 - ResNET50 feature extractor :
-- ResNET50 FineTuned :
-- EfficientNetB0 feature extractor :
-- EfficientNetB0 FineTuned :
-- EfficientNetB1 feature extractor :
-- EfficientNetB1 FineTuned :
-- EfficientNetB2 feature extractor :
-- EfficientNetB2 FineTuned :
-- EfficientNetB3 feature extractor :
-- EfficientNetB3 FineTuned :
+- ResNET50 fineTuned :
+- EfficientNetB0 feature extractor : accuracy - 0.71 | precision - 0.72 | recall - 0.72 | F1 score - 0.71
+- EfficientNetB0 fineTuned : accuracy - 0.80 | precision - 0.81 | recall - 0.80 | F1 score - 0.80
+- EfficientNetB1 feature extractor : accuracy - 0.68 | precision - 0.69 | recall - 0.68 | F1 score - 0.68
+- EfficientNetB1 fineTuned : accuracy - 0.81| precision - 0.83 | recall - 0.82 | F1 score - 0.82
+- EfficientNetB2 feature extractor : accuracy - 0.64 | precision - 0.64 | recall - 0.64 | F1 score - 0.63
+- EfficientNetB2 fineTuned : accuracy - 0.83 | precision - 0.84 | recall - 0.83| F1 score -0.83a
+- EfficientNetB3 feature extractor : accuracy - 0.64 | precision - 0.65 | recall - 0.64 | F1 score - 0.63
+- EfficientNetB3 fineTuned : accuracy - 0.84| precision - 0.84 | recall - 0.83 | F1 score - 0.83
 - EfficientNetB4 feature extractor :
-- EfficientNetB4 FineTuned :
+- EfficientNetB4 fineTuned :
+
+Best model :
+To achieve a best model I will finetune the hyper parameters, on the finetuned EfficientNetB3 : I will look for the best LR, and if this doesn't allow me go beyound 0.90 accuracy I will also change the number of neurons in the last layers
