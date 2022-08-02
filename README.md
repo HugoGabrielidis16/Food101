@@ -18,9 +18,7 @@ My aim was to surpass this accuracy implementing various state of the arts model
 
 ## How to use
 
-To verify my results you can either clone the git folder and use the bash with the command line :
-chmod +x test_script.sh
-script.sh "model_name"
+**Gradio** To generate a webpage with gradio you can just run the use_gradio.py file
 
 ## Stack used :
 
