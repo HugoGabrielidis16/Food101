@@ -116,7 +116,7 @@ def preprocessing(img):
 
 def apply_model(img):
     model = tf.keras.models.load_model(
-        "/Users/hugo/Projet/CV/Food101/models/saved/finetuned_EfficientNetB0_model.h5"
+        "./saved_model/finetuned_EfficientNetB0_model.h5"
     )
     img = preprocessing(img)
     predicted = model.predict(img)
